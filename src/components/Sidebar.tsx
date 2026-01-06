@@ -19,7 +19,7 @@ function Sidebar() {
         <button className="sidebar-item">Intent</button>
         <button className="sidebar-item">Queues</button>
         <button className="sidebar-item">Routing</button>
-        <button className="sidebar-item">Workstreams</button>
+        <button className="sidebar-item">Profiles</button>
         <button className="sidebar-item">Case settings</button>
         <button className="sidebar-item">Customer settings</button>
         <button className="sidebar-item truncated">Quality managem...</button>
