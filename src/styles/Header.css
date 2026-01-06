@@ -1,5 +1,5 @@
 .header {
-  background-color: #1e1e1e;
+  background-color: #002050;
   color: white;
   height: 48px;
   display: flex;
@@ -75,7 +75,7 @@
 }
 
 .header-icon:hover {
-  background-color: #323232;
+  background-color: #003380;
 }
 
 .header-avatar {
