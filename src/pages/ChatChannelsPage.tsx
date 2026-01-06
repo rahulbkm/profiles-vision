@@ -3,13 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { chatChannelsData, ChatChannel } from '../data/chatChannels';
 import '../styles/ChatChannelsPage.css';
 
-type SortColumn = 'channelName' | 'workstream' | 'owner' | 'createdOn';
-type SortDirection = 'asc' | 'desc';
-
 function ChatChannelsPage() {
   const navigate = useNavigate();
-  const [sortColumn] = useState<SortColumn>('channelName');
-  const [sortDirection] = useState<SortDirection>('asc');
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredChannels = chatChannelsData.filter(channel =>
@@ -55,11 +50,7 @@ function ChatChannelsPage() {
             <th>
               <div className="sortable">
                 Channel Name
-                {sortColumn === 'channelName' && (
-                  <span className="sort-icon">
-                    {sortDirection === 'asc' ? '▲' : '▼'}
-                  </span>
-                )}
+                <span className="sort-icon">▲</span>
               </div>
             </th>
             <th>Workstream</th>
@@ -71,7 +62,7 @@ function ChatChannelsPage() {
           {filteredChannels.map((channel: ChatChannel, index: number) => (
             <tr key={index}>
               <td>{channel.channelName}</td>
-              <td><a href="#" onClick={(e) => e.preventDefault()}>{channel.workstream}</a></td>
+              <td><span style={{ color: '#0078d4', cursor: 'pointer' }}>{channel.workstream}</span></td>
               <td>{channel.owner}</td>
               <td>{channel.createdOn}</td>
             </tr>

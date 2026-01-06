@@ -43,7 +43,7 @@ function ChannelsPage() {
                 <div className="channel-item-description">
                   Change the support channels that customer service representatives can use to engage with customers.
                 </div>
-                <a href="#" className="channel-item-link">Learn more</a>
+                <span className="channel-item-link" style={{ cursor: 'pointer' }}>Learn more</span>
               </div>
               <div className="channel-item-actions">
                 <button className="manage-button">
@@ -58,7 +58,7 @@ function ChannelsPage() {
                 <div className="channel-item-description">
                   Consult and transfer work across your organization.
                 </div>
-                <a href="#" className="channel-item-link">Learn more</a>
+                <span className="channel-item-link" style={{ cursor: 'pointer' }}>Learn more</span>
               </div>
               <div className="channel-item-actions">
                 <button className="manage-button">
@@ -89,7 +89,7 @@ function ChannelsPage() {
                 <div className="channel-item-description">
                   Determine how work items get automatically distributed to representatives.
                 </div>
-                <a href="#" className="channel-item-link">Learn more</a>
+                <span className="channel-item-link" style={{ cursor: 'pointer' }}>Learn more</span>
               </div>
               <div className="channel-item-actions">
                 <button className="manage-button">
@@ -104,7 +104,7 @@ function ChannelsPage() {
                 <div className="channel-item-description">
                   Help your customers with chat channels.
                 </div>
-                <a href="#" className="channel-item-link">Learn more</a>
+                <span className="channel-item-link" style={{ cursor: 'pointer' }}>Learn more</span>
               </div>
               <div className="channel-item-actions">
                 <button 
@@ -136,7 +136,7 @@ function ChannelsPage() {
                 <div className="channel-item-description">
                   Help your customers with SMS and social media digital messaging channels.
                 </div>
-                <a href="#" className="channel-item-link">Learn more</a>
+                <span className="channel-item-link" style={{ cursor: 'pointer' }}>Learn more</span>
               </div>
               <div className="channel-item-actions">
                 <button className="manage-button">
@@ -151,7 +151,7 @@ function ChannelsPage() {
                 <div className="channel-item-description">
                   Help your customers with voice channels.
                 </div>
-                <a href="#" className="channel-item-link">Learn more</a>
+                <span className="channel-item-link" style={{ cursor: 'pointer' }}>Learn more</span>
               </div>
               <div className="channel-item-actions">
                 <button className="manage-button">
@@ -166,7 +166,7 @@ function ChannelsPage() {
                 <div className="channel-item-description">
                   Update your voice resources to the latest version.
                 </div>
-                <a href="#" className="channel-item-link">Learn more</a>
+                <span className="channel-item-link" style={{ cursor: 'pointer' }}>Learn more</span>
               </div>
               <div className="channel-item-actions">
                 <button className="manage-button">
