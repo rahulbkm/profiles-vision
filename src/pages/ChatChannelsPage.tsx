@@ -9,7 +9,8 @@ function ChatChannelsPage() {
 
   const filteredChannels = chatChannelsData.filter(channel =>
     channel.channelName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    channel.workstream.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    channel.channelProfile.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    channel.routingProfile.toLowerCase().includes(searchTerm.toLowerCase()) ||
     channel.owner.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -53,7 +54,8 @@ function ChatChannelsPage() {
                 <span className="sort-icon">▲</span>
               </div>
             </th>
-            <th>Workstream</th>
+            <th>Channel profile</th>
+            <th>Routing profile</th>
             <th>Owner</th>
             <th>CreatedOn</th>
           </tr>
@@ -61,8 +63,13 @@ function ChatChannelsPage() {
         <tbody>
           {filteredChannels.map((channel: ChatChannel, index: number) => (
             <tr key={index}>
-              <td>{channel.channelName}</td>
-              <td><span style={{ color: '#0078d4', cursor: 'pointer' }}>{channel.workstream}</span></td>
+              <td>
+                <span style={{ color: '#0078d4', cursor: 'pointer' }}>
+                  {channel.channelName}
+                </span>
+              </td>
+              <td>{channel.channelProfile}</td>
+              <td>{channel.routingProfile}</td>
               <td>{channel.owner}</td>
               <td>{channel.createdOn}</td>
             </tr>

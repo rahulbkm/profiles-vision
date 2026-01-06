@@ -41,16 +41,16 @@
   width: 100%;
   max-width: 500px;
   height: 32px;
-  background-color: #323232;
+  background-color: white;
   border: none;
   border-radius: 2px;
   padding: 0 12px;
-  color: white;
+  color: #323130;
   font-size: 14px;
 }
 
 .header-search::placeholder {
-  color: #a0a0a0;
+  color: #605e5c;
 }
 
 .header-right {

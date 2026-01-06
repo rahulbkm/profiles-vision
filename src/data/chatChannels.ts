@@ -1,6 +1,7 @@
 export interface ChatChannel {
   channelName: string;
-  workstream: string;
+  channelProfile: string;
+  routingProfile: string;
   owner: string;
   createdOn: string;
 }
@@ -8,67 +9,78 @@ export interface ChatChannel {
 export const chatChannelsData: ChatChannel[] = [
   {
     channelName: 'Contact center chat channel',
-    workstream: 'Contact center live chat workstream',
+    channelProfile: 'Default channel profile',
+    routingProfile: 'Default routing profile',
     owner: 'Aurora365 User6',
     createdOn: '9/10/2025 1:30 PM'
   },
   {
     channelName: 'swatichat2',
-    workstream: 'swatiWorkstream',
+    channelProfile: 'Custom channel profile',
+    routingProfile: 'Standard routing profile',
     owner: 'Aurora365 User6',
     createdOn: '8/14/2025 4:44 PM'
   },
   {
     channelName: 'QEA Chat Channel',
-    workstream: 'QEA Test',
+    channelProfile: 'QEA channel profile',
+    routingProfile: 'Test routing profile',
     owner: 'Aurora365 User6',
     createdOn: '8/19/2025 6:28 PM'
   },
   {
     channelName: 'swatiIntentTest',
-    workstream: 'swatiWorkstream',
+    channelProfile: 'Custom channel profile',
+    routingProfile: 'Standard routing profile',
     owner: 'Aurora365 User6',
     createdOn: '8/1/2025 12:32 PM'
   },
   {
     channelName: 'TestChat',
-    workstream: 'KWorkstream',
+    channelProfile: 'Default channel profile',
+    routingProfile: 'Default routing profile',
     owner: 'Aurora365 User6',
     createdOn: '8/5/2025 1:32 PM'
   },
   {
     channelName: 'chat101',
-    workstream: 'TestWS1',
+    channelProfile: 'Test channel profile',
+    routingProfile: 'Test routing profile',
     owner: 'Aurora365 User6',
     createdOn: '8/7/2025 5:00 PM'
   },
   {
     channelName: 'Chat Channel',
-    workstream: 'Chat Workstream',
+    channelProfile: 'Default channel profile',
+    routingProfile: 'Default routing profile',
     owner: 'Aurora365 User6',
     createdOn: '7/22/2025 12:23 AM'
   },
   {
     channelName: 'Copilot-Deflection',
-    workstream: 'CEA-Q-Bot-Digital',
+    channelProfile: 'Bot channel profile',
+    routingProfile: 'Digital routing profile',
     owner: 'Aurora365 User6',
     createdOn: '10/10/2025 1:59 AM'
   },
   {
     channelName: 'CIA-M-Deflection',
-    workstream: 'LCW-CIA-M-Deflection',
+    channelProfile: 'CIA channel profile',
+    routingProfile: 'Deflection routing profile',
     owner: 'Aurora365 User6',
     createdOn: '10/10/2025 1:01 AM'
   },
   {
     channelName: 'CIA-M-PN-LetsChat',
-    workstream: 'CIA-M-PN',
+    channelProfile: 'CIA channel profile',
+    routingProfile: 'PN routing profile',
     owner: 'Aurora365 User6',
     createdOn: '11/19/2025 11:19 AM'
   },
   {
     channelName: 'ClemChat',
-    workstream: 'ClemChatWS',
+    channelProfile: 'Custom channel profile',
+    routingProfile: 'Custom routing profile',
     owner: 'Aurora365 User6',
     createdOn: '11/27/2025 3:20 AM'
   }
