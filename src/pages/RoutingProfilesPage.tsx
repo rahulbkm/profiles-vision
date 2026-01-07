@@ -10,7 +10,7 @@ function RoutingProfilesPage() {
   const filteredProfiles = routingProfilesData.filter(profile =>
     profile.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     profile.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    profile.configurations.routingMethod.toLowerCase().includes(searchTerm.toLowerCase())
+    profile.configurations.fallbackQueue.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Generate mock created dates
@@ -33,6 +33,12 @@ function RoutingProfilesPage() {
         <div className="toolbar-left">
           <button className="toolbar-button">
             <span>↻</span> Refresh
+          </button>
+          <button 
+            className="toolbar-button new-button"
+            onClick={() => navigate('/routing-profiles/new')}
+          >
+            <span>+</span> New routing profile
           </button>
         </div>
         <input
@@ -65,7 +71,9 @@ function RoutingProfilesPage() {
               </div>
             </th>
             <th>Description</th>
-            <th>Routing Method</th>
+            <th>Fallback Queue</th>
+            <th>Rule-hit Policy</th>
+            <th>Work Distribution Mode</th>
             <th>Created On</th>
           </tr>
         </thead>
@@ -81,7 +89,9 @@ function RoutingProfilesPage() {
                 </Link>
               </td>
               <td>{profile.description}</td>
-              <td>{profile.configurations.routingMethod}</td>
+              <td>{profile.configurations.fallbackQueue}</td>
+              <td>{profile.configurations.ruleHitPolicy === 'hit-first' ? 'Hit First' : 'Hit All'}</td>
+              <td>{profile.configurations.workDistributionSettings.workDistributionMode === 'push' ? 'Push' : 'Pick'}</td>
               <td>{getCreatedDate(index)}</td>
             </tr>
           ))}

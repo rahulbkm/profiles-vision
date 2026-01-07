@@ -468,6 +468,19 @@
   color: #a19f9d;
 }
 
+.config-link {
+  color: #0078d4;
+  text-decoration: none;
+}
+
+.config-link:hover {
+  text-decoration: underline;
+}
+
+.config-item.full-width {
+  grid-column: 1 / -1;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .sidebar-nav {

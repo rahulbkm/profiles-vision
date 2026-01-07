@@ -404,7 +404,7 @@ function CreateChatChannelPage() {
                 {/* Create new profile CTA */}
                 <button 
                   className="create-profile-btn"
-                  onClick={() => alert('Create new routing profile functionality coming soon!')}
+                  onClick={() => navigate('/routing-profiles/new')}
                 >
                   <span>+</span> Create new routing profile
                 </button>
@@ -421,12 +421,32 @@ function CreateChatChannelPage() {
                   </p>
                   
                   <div className="config-grid">
-                    <div className="config-item">
-                      <span className="config-label">Routing Method</span>
-                      <span className="config-value">
-                        {selectedRoutingProfile.configurations.routingMethod}
-                      </span>
-                    </div>
+                    {/* Work Classification */}
+                    {selectedRoutingProfile.configurations.workClassification.length > 0 && (
+                      <div className="config-item full-width">
+                        <span className="config-label">Work Classification</span>
+                        <div className="config-value">
+                          {selectedRoutingProfile.configurations.workClassification.map((ruleset, index) => (
+                            <span key={ruleset.id}>
+                              <a href={ruleset.url} className="config-link">{ruleset.name}</a>
+                              {index < selectedRoutingProfile.configurations.workClassification.length - 1 && ', '}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Route to Queue Rules */}
+                    {selectedRoutingProfile.configurations.routeToQueueRules && (
+                      <div className="config-item full-width">
+                        <span className="config-label">Route to Queue Rules</span>
+                        <span className="config-value">
+                          <a href={selectedRoutingProfile.configurations.routeToQueueRules.url} className="config-link">
+                            {selectedRoutingProfile.configurations.routeToQueueRules.name}
+                          </a>
+                        </span>
+                      </div>
+                    )}
                     
                     <div className="config-item">
                       <span className="config-label">Fallback Queue</span>
@@ -436,37 +456,47 @@ function CreateChatChannelPage() {
                     </div>
                     
                     <div className="config-item">
-                      <span className="config-label">Priority Level</span>
+                      <span className="config-label">Rule-hit Policy</span>
                       <span className="config-value">
-                        {selectedRoutingProfile.configurations.priorityLevel}
+                        {selectedRoutingProfile.configurations.ruleHitPolicy === 'hit-first' ? 'Hit First' : 'Hit All'}
                       </span>
                     </div>
                     
                     <div className="config-item">
                       <span className="config-label">Work Distribution Mode</span>
                       <span className="config-value">
-                        {selectedRoutingProfile.configurations.workDistributionMode}
+                        {selectedRoutingProfile.configurations.workDistributionSettings.workDistributionMode === 'push' ? 'Push' : 'Pick'}
                       </span>
                     </div>
                     
                     <div className="config-item">
-                      <span className="config-label">Capacity Per Agent</span>
+                      <span className="config-label">Capacity Profile</span>
                       <span className="config-value">
-                        {selectedRoutingProfile.configurations.capacityPerAgent}
+                        {selectedRoutingProfile.configurations.workDistributionSettings.capacityProfile}
                       </span>
                     </div>
                     
                     <div className="config-item">
-                      <span className="config-label">Presence-based Routing</span>
-                      <span className={`config-value ${selectedRoutingProfile.configurations.presenceBasedRouting ? 'enabled' : 'disabled'}`}>
-                        {selectedRoutingProfile.configurations.presenceBasedRouting ? 'Enabled' : 'Disabled'}
+                      <span className="config-label">Allowed Presences</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.workDistributionSettings.allowedPresences.join(', ')}
                       </span>
                     </div>
                     
                     <div className="config-item">
-                      <span className="config-label">Skill-based Routing</span>
-                      <span className={`config-value ${selectedRoutingProfile.configurations.skillBasedRouting ? 'enabled' : 'disabled'}`}>
-                        {selectedRoutingProfile.configurations.skillBasedRouting ? 'Enabled' : 'Disabled'}
+                      <span className="config-label">Default Skill Matching</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.workDistributionSettings.defaultSkillMatchingAlgorithm === 'closest-match' ? 'Closest Match' : 
+                         selectedRoutingProfile.configurations.workDistributionSettings.defaultSkillMatchingAlgorithm === 'exact-match' ? 'Exact Match' : 'None'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">After Call Work</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.workDistributionSettings.afterCallWork.mode === 'always-block' ? 'Always Block' :
+                         selectedRoutingProfile.configurations.workDistributionSettings.afterCallWork.mode === 'do-not-block' ? 'Do Not Block' :
+                         `Custom Time (${selectedRoutingProfile.configurations.workDistributionSettings.afterCallWork.customTimeSeconds}s)`}
                       </span>
                     </div>
                   </div>

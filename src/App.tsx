@@ -9,7 +9,8 @@ import ChannelProfilesPage from './pages/ChannelProfilesPage';
 import EditChannelProfilePage from './pages/EditChannelProfilePage';
 import CreateChannelProfilePage from './pages/CreateChannelProfilePage';
 import RoutingProfilesPage from './pages/RoutingProfilesPage';
-import RoutingProfilePlaceholderPage from './pages/RoutingProfilePlaceholderPage';
+import EditRoutingProfilePage from './pages/EditRoutingProfilePage';
+import CreateRoutingProfilePage from './pages/CreateRoutingProfilePage';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
           <Route path="/channel-profiles/new" element={<CreateChannelProfilePage />} />
           <Route path="/channel-profiles/:profileId" element={<EditChannelProfilePage />} />
           <Route path="/routing-profiles" element={<RoutingProfilesPage />} />
-          <Route path="/routing-profiles/:profileId" element={<RoutingProfilePlaceholderPage />} />
+          <Route path="/routing-profiles/new" element={<CreateRoutingProfilePage />} />
+          <Route path="/routing-profiles/:profileId" element={<EditRoutingProfilePage />} />
         </Routes>
       </Layout>
     </Router>
