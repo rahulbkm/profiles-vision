@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { chatChannelsData, ChatChannel } from '../data/chatChannels';
 import '../styles/ChatChannelsPage.css';
 
@@ -61,12 +61,15 @@ function ChatChannelsPage() {
           </tr>
         </thead>
         <tbody>
-          {filteredChannels.map((channel: ChatChannel, index: number) => (
-            <tr key={index}>
+          {filteredChannels.map((channel: ChatChannel) => (
+            <tr key={channel.id}>
               <td>
-                <span style={{ color: '#0078d4', cursor: 'pointer' }}>
+                <Link 
+                  to={`/chat-channels/${channel.id}`}
+                  style={{ color: '#0078d4', cursor: 'pointer', textDecoration: 'none' }}
+                >
                   {channel.channelName}
-                </span>
+                </Link>
               </td>
               <td>{channel.channelProfile}</td>
               <td>{channel.routingProfile}</td>
