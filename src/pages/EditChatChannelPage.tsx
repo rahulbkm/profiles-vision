@@ -53,40 +53,34 @@ function EditChatChannelPage() {
             General Configuration
           </button>
           <button 
-            className={`nav-item ${activeTab === 'color' ? 'active' : ''}`}
+            className={`nav-item nav-sub-item ${activeTab === 'color' ? 'active' : ''}`}
             onClick={() => setActiveTab('color')}
           >
             Color Settings
           </button>
           <button 
-            className={`nav-item ${activeTab === 'header' ? 'active' : ''}`}
+            className={`nav-item nav-sub-item ${activeTab === 'header' ? 'active' : ''}`}
             onClick={() => setActiveTab('header')}
           >
             Header
           </button>
           <button 
-            className={`nav-item ${activeTab === 'widget' ? 'active' : ''}`}
+            className={`nav-item nav-sub-item ${activeTab === 'widget' ? 'active' : ''}`}
             onClick={() => setActiveTab('widget')}
           >
-            Chat widget
+            Chat Widget
           </button>
           <button 
-            className={`nav-item ${activeTab === 'behaviors' ? 'active' : ''}`}
-            onClick={() => setActiveTab('behaviors')}
+            className={`nav-item ${activeTab === 'channel-profile' ? 'active' : ''}`}
+            onClick={() => setActiveTab('channel-profile')}
           >
-            Behaviors
+            Channel profile
           </button>
           <button 
-            className={`nav-item ${activeTab === 'user' ? 'active' : ''}`}
-            onClick={() => setActiveTab('user')}
+            className={`nav-item ${activeTab === 'routing-profile' ? 'active' : ''}`}
+            onClick={() => setActiveTab('routing-profile')}
           >
-            User features
-          </button>
-          <button 
-            className={`nav-item ${activeTab === 'notifications' ? 'active' : ''}`}
-            onClick={() => setActiveTab('notifications')}
-          >
-            Notifications
+            Routing profile
           </button>
         </div>
 
