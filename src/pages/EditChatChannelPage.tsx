@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { chatChannelsData } from '../data/chatChannels';
+import { channelProfilesData, ChannelProfile } from '../data/channelProfiles';
+import { routingProfilesData, RoutingProfile } from '../data/routingProfiles';
 import '../styles/EditChatChannelPage.css';
 
 function EditChatChannelPage() {
@@ -14,6 +16,8 @@ function EditChatChannelPage() {
   const [width, setWidth] = useState('360');
   const [height, setHeight] = useState('560');
   const [sliderValue, setSliderValue] = useState(20);
+  const [selectedChannelProfile, setSelectedChannelProfile] = useState<ChannelProfile | null>(null);
+  const [selectedRoutingProfile, setSelectedRoutingProfile] = useState<RoutingProfile | null>(null);
 
   if (!channel) {
     return <div>Channel not found</div>;
@@ -237,7 +241,226 @@ function EditChatChannelPage() {
           )}
 
           {/* Placeholder for other tabs */}
-          {activeTab !== 'general' && (
+          {activeTab === 'channel-profile' && (
+            <div className="profile-config">
+              <h2 className="section-title">Channel Profile</h2>
+              
+              {/* Help text banner */}
+              <div className="info-banner">
+                <p className="info-banner-text">
+                  All channel experience related configurations will be driven by the profile attached to this channel.
+                </p>
+                <p className="info-banner-text">
+                  A channel profile can optionally be associated with a queue for more granular control.
+                </p>
+              </div>
+
+              {/* Channel profile selection */}
+              <div className="form-section">
+                <div className="form-group">
+                  <label className="form-label">
+                    Select Channel Profile<span className="required">*</span>
+                  </label>
+                  <select 
+                    className="form-select"
+                    value={selectedChannelProfile?.id || ''}
+                    onChange={(e) => {
+                      const profile = channelProfilesData.find(p => p.id === e.target.value);
+                      setSelectedChannelProfile(profile || null);
+                    }}
+                  >
+                    <option value="">Select a channel profile...</option>
+                    {channelProfilesData.map(profile => (
+                      <option key={profile.id} value={profile.id}>
+                        {profile.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Create new profile CTA */}
+                <button 
+                  className="create-profile-btn"
+                  onClick={() => alert('Create new channel profile functionality coming soon!')}
+                >
+                  <span>+</span> Create new channel profile
+                </button>
+              </div>
+
+              {/* Profile configuration summary */}
+              {selectedChannelProfile && (
+                <div className="profile-summary-card">
+                  <h3 className="profile-summary-title">
+                    Configuration Summary: {selectedChannelProfile.name}
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#605e5c', marginBottom: '20px' }}>
+                    {selectedChannelProfile.description}
+                  </p>
+                  
+                  <div className="config-grid">
+                    <div className="config-item">
+                      <span className="config-label">Pre-chat Survey</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.preChatSurvey ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.preChatSurvey ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Post-chat Survey</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.postChatSurvey ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.postChatSurvey ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">File Attachments</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.fileAttachments ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.fileAttachments ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Customer Wait Time</span>
+                      <span className="config-value">
+                        {selectedChannelProfile.configurations.customerWaitTime}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Auto-close After Inactivity</span>
+                      <span className="config-value">
+                        {selectedChannelProfile.configurations.autoCloseAfterInactivity}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Conversation Mode</span>
+                      <span className="config-value">
+                        {selectedChannelProfile.configurations.conversationMode}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Authenticated Chat</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.authenticatedChat ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.authenticatedChat ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'routing-profile' && (
+            <div className="profile-config">
+              <h2 className="section-title">Routing Profile</h2>
+              
+              {/* Help text banner */}
+              <div className="info-banner">
+                <p className="info-banner-text">
+                  All routing decisions will be driven by the profile attached to this channel.
+                </p>
+              </div>
+
+              {/* Routing profile selection */}
+              <div className="form-section">
+                <div className="form-group">
+                  <label className="form-label">
+                    Select Routing Profile<span className="required">*</span>
+                  </label>
+                  <select 
+                    className="form-select"
+                    value={selectedRoutingProfile?.id || ''}
+                    onChange={(e) => {
+                      const profile = routingProfilesData.find(p => p.id === e.target.value);
+                      setSelectedRoutingProfile(profile || null);
+                    }}
+                  >
+                    <option value="">Select a routing profile...</option>
+                    {routingProfilesData.map(profile => (
+                      <option key={profile.id} value={profile.id}>
+                        {profile.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Create new profile CTA */}
+                <button 
+                  className="create-profile-btn"
+                  onClick={() => alert('Create new routing profile functionality coming soon!')}
+                >
+                  <span>+</span> Create new routing profile
+                </button>
+              </div>
+
+              {/* Profile configuration summary */}
+              {selectedRoutingProfile && (
+                <div className="profile-summary-card">
+                  <h3 className="profile-summary-title">
+                    Configuration Summary: {selectedRoutingProfile.name}
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#605e5c', marginBottom: '20px' }}>
+                    {selectedRoutingProfile.description}
+                  </p>
+                  
+                  <div className="config-grid">
+                    <div className="config-item">
+                      <span className="config-label">Routing Method</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.routingMethod}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Fallback Queue</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.fallbackQueue}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Priority Level</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.priorityLevel}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Work Distribution Mode</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.workDistributionMode}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Capacity Per Agent</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.capacityPerAgent}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Presence-based Routing</span>
+                      <span className={`config-value ${selectedRoutingProfile.configurations.presenceBasedRouting ? 'enabled' : 'disabled'}`}>
+                        {selectedRoutingProfile.configurations.presenceBasedRouting ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Skill-based Routing</span>
+                      <span className={`config-value ${selectedRoutingProfile.configurations.skillBasedRouting ? 'enabled' : 'disabled'}`}>
+                        {selectedRoutingProfile.configurations.skillBasedRouting ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab !== 'general' && activeTab !== 'channel-profile' && activeTab !== 'routing-profile' && (
             <div className="placeholder-content">
               <h2 className="section-title">
                 {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Configuration

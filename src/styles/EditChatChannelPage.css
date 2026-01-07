@@ -44,12 +44,13 @@
 }
 
 .save-button {
-  background-color: #106ebe;
-  color: white;
+  background-color: white;
+  color: #323130;
+  border: 1px solid #8a8886;
 }
 
 .save-button:hover {
-  background-color: #005a9e;
+  background-color: #f3f2f1;
 }
 
 .save-icon {
@@ -371,6 +372,96 @@
   opacity: 0.9;
 }
 
+/* Info banner for help text */
+.info-banner {
+  background-color: #f3f9fd;
+  border-left: 4px solid #0078d4;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.info-banner-text {
+  font-size: 14px;
+  color: #323130;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.info-banner-text + .info-banner-text {
+  margin-top: 8px;
+}
+
+/* Create new profile CTA button */
+.create-profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  margin-top: 12px;
+  background-color: white;
+  border: 1px solid #0078d4;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #0078d4;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.create-profile-btn:hover {
+  background-color: #f3f9fd;
+}
+
+/* Profile configuration summary card */
+.profile-summary-card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.profile-summary-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #323130;
+  margin: 0 0 16px 0;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.config-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.config-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #605e5c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.config-value {
+  font-size: 14px;
+  color: #323130;
+}
+
+.config-value.enabled {
+  color: #107c10;
+}
+
+.config-value.disabled {
+  color: #a19f9d;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .sidebar-nav {
@@ -393,5 +484,9 @@
   .chat-bubble {
     width: 160px;
     padding: 12px;
+  }
+
+  .config-grid {
+    grid-template-columns: 1fr;
   }
 }
