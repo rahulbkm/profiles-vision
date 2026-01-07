@@ -7,7 +7,7 @@
 
 /* Top toolbar */
 .edit-toolbar {
-  background-color: #0078d4;
+  background-color: white;
   padding: 12px 24px;
   display: flex;
   justify-content: space-between;
@@ -57,7 +57,7 @@
 }
 
 .toolbar-link {
-  color: white;
+  color: #323130;
   text-decoration: none;
   font-size: 14px;
   margin-left: 12px;
@@ -125,6 +125,17 @@
   background-color: #f3f2f1;
   border-left-color: #0078d4;
   color: #0078d4;
+  font-weight: 600;
+}
+
+/* Sub-menu items */
+.nav-sub-item {
+  padding-left: 48px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.nav-sub-item.active {
   font-weight: 600;
 }
 
