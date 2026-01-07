@@ -429,6 +429,12 @@
   margin: 0 0 16px 0;
 }
 
+.profile-description {
+  font-size: 14px;
+  color: #605e5c;
+  margin-bottom: 20px;
+}
+
 .config-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

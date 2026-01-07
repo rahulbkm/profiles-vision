@@ -293,7 +293,7 @@ function EditChatChannelPage() {
                   <h3 className="profile-summary-title">
                     Configuration Summary: {selectedChannelProfile.name}
                   </h3>
-                  <p style={{ fontSize: '14px', color: '#605e5c', marginBottom: '20px' }}>
+                  <p className="profile-description">
                     {selectedChannelProfile.description}
                   </p>
                   
@@ -401,7 +401,7 @@ function EditChatChannelPage() {
                   <h3 className="profile-summary-title">
                     Configuration Summary: {selectedRoutingProfile.name}
                   </h3>
-                  <p style={{ fontSize: '14px', color: '#605e5c', marginBottom: '20px' }}>
+                  <p className="profile-description">
                     {selectedRoutingProfile.description}
                   </p>
                   
