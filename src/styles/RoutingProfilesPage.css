@@ -35,6 +35,16 @@
   background-color: #f3f2f1;
 }
 
+.toolbar-button.new-button {
+  background-color: #0078d4;
+  color: white;
+  border-color: #0078d4;
+}
+
+.toolbar-button.new-button:hover {
+  background-color: #106ebe;
+}
+
 .toolbar-search {
   width: 250px;
   padding: 6px 12px;
