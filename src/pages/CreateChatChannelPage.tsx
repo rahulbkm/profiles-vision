@@ -17,6 +17,12 @@ function CreateChatChannelPage() {
   const [selectedRoutingProfile, setSelectedRoutingProfile] = useState<RoutingProfile | null>(null);
 
   const handleSaveAndClose = () => {
+    // Basic validation
+    if (!channelName.trim()) {
+      alert('Please enter a channel name');
+      return;
+    }
+
     console.log('Creating new chat channel:', {
       channelName,
       windowSize,
