@@ -18,6 +18,7 @@ function EditChatChannelPage() {
   const [sliderValue, setSliderValue] = useState(20);
   const [selectedChannelProfile, setSelectedChannelProfile] = useState<ChannelProfile | null>(null);
   const [selectedRoutingProfile, setSelectedRoutingProfile] = useState<RoutingProfile | null>(null);
+  const [channelConfigExpanded, setChannelConfigExpanded] = useState(true);
 
   if (!channel) {
     return <div>Channel not found</div>;
@@ -51,29 +52,40 @@ function EditChatChannelPage() {
         {/* Left sidebar navigation */}
         <div className="sidebar-nav">
           <button 
-            className={`nav-item ${activeTab === 'general' ? 'active' : ''}`}
-            onClick={() => setActiveTab('general')}
+            className="nav-item nav-parent"
+            onClick={() => setChannelConfigExpanded(!channelConfigExpanded)}
           >
-            General Configuration
+            <span>Channel configuration</span>
+            <span className={`nav-chevron ${channelConfigExpanded ? 'expanded' : ''}`}>▶</span>
           </button>
-          <button 
-            className={`nav-item nav-sub-item ${activeTab === 'color' ? 'active' : ''}`}
-            onClick={() => setActiveTab('color')}
-          >
-            Color Settings
-          </button>
-          <button 
-            className={`nav-item nav-sub-item ${activeTab === 'header' ? 'active' : ''}`}
-            onClick={() => setActiveTab('header')}
-          >
-            Header
-          </button>
-          <button 
-            className={`nav-item nav-sub-item ${activeTab === 'widget' ? 'active' : ''}`}
-            onClick={() => setActiveTab('widget')}
-          >
-            Chat Widget
-          </button>
+          {channelConfigExpanded && (
+            <>
+              <button 
+                className={`nav-item nav-sub-item ${activeTab === 'general' ? 'active' : ''}`}
+                onClick={() => setActiveTab('general')}
+              >
+                General configuration
+              </button>
+              <button 
+                className={`nav-item nav-sub-item ${activeTab === 'color' ? 'active' : ''}`}
+                onClick={() => setActiveTab('color')}
+              >
+                Color settings
+              </button>
+              <button 
+                className={`nav-item nav-sub-item ${activeTab === 'header' ? 'active' : ''}`}
+                onClick={() => setActiveTab('header')}
+              >
+                Header
+              </button>
+              <button 
+                className={`nav-item nav-sub-item ${activeTab === 'widget' ? 'active' : ''}`}
+                onClick={() => setActiveTab('widget')}
+              >
+                Chat widget
+              </button>
+            </>
+          )}
           <button 
             className={`nav-item ${activeTab === 'channel-profile' ? 'active' : ''}`}
             onClick={() => setActiveTab('channel-profile')}

@@ -129,6 +129,24 @@
   font-weight: 600;
 }
 
+/* Parent menu items with expand/collapse */
+.nav-item.nav-parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 12px;
+}
+
+.nav-chevron {
+  font-size: 10px;
+  color: #605e5c;
+  transition: transform 0.2s;
+}
+
+.nav-chevron.expanded {
+  transform: rotate(90deg);
+}
+
 /* Sub-menu items */
 .nav-sub-item {
   padding-left: 48px;
