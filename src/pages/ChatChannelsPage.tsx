@@ -18,7 +18,7 @@ function ChatChannelsPage() {
     <div className="chat-channels-page">
       <div className="page-toolbar">
         <div className="toolbar-left">
-          <button className="toolbar-button primary">
+          <button className="toolbar-button primary" onClick={() => navigate('/chat-channels/new')}>
             <span>+</span> Add chat channel
           </button>
           <button className="toolbar-button">
