@@ -45,8 +45,24 @@ function EditRoutingProfilePage() {
   );
   const [showWorkDistribution, setShowWorkDistribution] = useState(true);
 
-  if (!profile) {
-    return <div>Profile not found</div>;
+  if (!profile || !profileId) {
+    return (
+      <div className="edit-routing-profile-page">
+        <div className="edit-toolbar">
+          <div className="toolbar-left">
+            <button 
+              className="toolbar-button back-button" 
+              onClick={() => navigate('/routing-profiles')}
+            >
+              ← Back
+            </button>
+          </div>
+        </div>
+        <div className="page-header">
+          <h1 className="page-title">Profile not found</h1>
+        </div>
+      </div>
+    );
   }
 
   const handleSaveAndClose = () => {
