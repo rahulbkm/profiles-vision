@@ -1,0 +1,500 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { channelProfilesData, ChannelProfile } from '../data/channelProfiles';
+import { routingProfilesData, RoutingProfile } from '../data/routingProfiles';
+import '../styles/EditChatChannelPage.css';
+
+function CreateChatChannelPage() {
+  const navigate = useNavigate();
+  
+  const [activeTab, setActiveTab] = useState('general');
+  const [windowSize, setWindowSize] = useState('default');
+  const [width, setWidth] = useState('360');
+  const [height, setHeight] = useState('560');
+  const [sliderValue, setSliderValue] = useState(20);
+  const [channelName, setChannelName] = useState('');
+  const [selectedChannelProfile, setSelectedChannelProfile] = useState<ChannelProfile | null>(null);
+  const [selectedRoutingProfile, setSelectedRoutingProfile] = useState<RoutingProfile | null>(null);
+
+  const handleSaveAndClose = () => {
+    // Basic validation
+    if (!channelName.trim()) {
+      alert('Please enter a channel name');
+      return;
+    }
+
+    console.log('Creating new chat channel:', {
+      channelName,
+      windowSize,
+      width,
+      height,
+      sliderValue,
+      selectedChannelProfile: selectedChannelProfile?.name,
+      selectedRoutingProfile: selectedRoutingProfile?.name
+    });
+    alert('Chat channel created successfully!');
+    navigate('/chat-channels');
+  };
+
+  return (
+    <div className="edit-channel-page">
+      {/* Top toolbar */}
+      <div className="edit-toolbar">
+        <div className="toolbar-left">
+          <button 
+            className="toolbar-button back-button" 
+            onClick={() => navigate('/chat-channels')}
+          >
+            ← Back
+          </button>
+          <button className="toolbar-button save-button" onClick={handleSaveAndClose}>
+            <span className="save-icon">💾</span> Save and close
+          </button>
+          <a href="#" className="toolbar-link">Download configuration</a>
+        </div>
+      </div>
+
+      {/* Page header */}
+      <div className="page-header">
+        <h1 className="page-title">Create New Chat Channel</h1>
+        <p className="page-subtitle">Configure a new live chat channel</p>
+      </div>
+
+      <div className="content-wrapper">
+        {/* Left sidebar navigation */}
+        <div className="sidebar-nav">
+          <button 
+            className={`nav-item ${activeTab === 'general' ? 'active' : ''}`}
+            onClick={() => setActiveTab('general')}
+          >
+            General Configuration
+          </button>
+          <button 
+            className={`nav-item nav-sub-item ${activeTab === 'color' ? 'active' : ''}`}
+            onClick={() => setActiveTab('color')}
+          >
+            Color Settings
+          </button>
+          <button 
+            className={`nav-item nav-sub-item ${activeTab === 'header' ? 'active' : ''}`}
+            onClick={() => setActiveTab('header')}
+          >
+            Header
+          </button>
+          <button 
+            className={`nav-item nav-sub-item ${activeTab === 'widget' ? 'active' : ''}`}
+            onClick={() => setActiveTab('widget')}
+          >
+            Chat Widget
+          </button>
+          <button 
+            className={`nav-item ${activeTab === 'channel-profile' ? 'active' : ''}`}
+            onClick={() => setActiveTab('channel-profile')}
+          >
+            Channel profile
+          </button>
+          <button 
+            className={`nav-item ${activeTab === 'routing-profile' ? 'active' : ''}`}
+            onClick={() => setActiveTab('routing-profile')}
+          >
+            Routing profile
+          </button>
+        </div>
+
+        {/* Main content area */}
+        <div className="main-content">
+          {activeTab === 'general' && (
+            <div className="general-config">
+              <h2 className="section-title">General Configuration</h2>
+
+              {/* Channel details subsection */}
+              <div className="form-section">
+                <h3 className="subsection-title">Channel details</h3>
+                
+                <div className="form-group">
+                  <label className="form-label">
+                    Name<span className="required">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    className="form-input" 
+                    value={channelName}
+                    onChange={(e) => setChannelName(e.target.value)}
+                    placeholder="Enter channel name"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">
+                    Language<span className="required">*</span>
+                  </label>
+                  <select className="form-select">
+                    <option>English - United States</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">
+                    Type<span className="required">*</span>
+                  </label>
+                  <select className="form-select" disabled>
+                    <option>Messaging</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">
+                    Channel<span className="required">*</span>
+                  </label>
+                  <select className="form-select" disabled>
+                    <option>Chat</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Workstream</label>
+                  <a href="#" className="form-link">Contact center live chat workstream</a>
+                </div>
+              </div>
+
+              {/* Window Size and Position subsection */}
+              <div className="form-section">
+                <h3 className="subsection-title">Window Size and Position</h3>
+                
+                <div className="form-group">
+                  <label className="form-label">
+                    Window Size<span className="required">*</span>
+                  </label>
+                  <div className="radio-group">
+                    <label className="radio-label">
+                      <input 
+                        type="radio" 
+                        name="windowSize" 
+                        value="default"
+                        checked={windowSize === 'default'}
+                        onChange={(e) => setWindowSize(e.target.value)}
+                      />
+                      <span>Default</span>
+                    </label>
+                    <label className="radio-label">
+                      <input 
+                        type="radio" 
+                        name="windowSize" 
+                        value="compact"
+                        checked={windowSize === 'compact'}
+                        onChange={(e) => setWindowSize(e.target.value)}
+                      />
+                      <span>Compact</span>
+                    </label>
+                    <label className="radio-label">
+                      <input 
+                        type="radio" 
+                        name="windowSize" 
+                        value="custom"
+                        checked={windowSize === 'custom'}
+                        onChange={(e) => setWindowSize(e.target.value)}
+                      />
+                      <span>Custom</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Width</label>
+                    <input 
+                      type="text" 
+                      className="form-input small" 
+                      value={width}
+                      onChange={(e) => setWidth(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Height</label>
+                    <input 
+                      type="text" 
+                      className="form-input small" 
+                      value={height}
+                      onChange={(e) => setHeight(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">
+                    Position<span className="required">*</span>
+                  </label>
+                  <select className="form-select">
+                    <option>Bottom right</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Distance From Corners subsection */}
+              <div className="form-section">
+                <h3 className="subsection-title">Distance From Corners</h3>
+                
+                <div className="form-group">
+                  <label className="form-label">
+                    Window Position<span className="required">*</span>
+                  </label>
+                  <label className="form-label secondary">Amount (px)</label>
+                  <div className="slider-container">
+                    <input 
+                      type="range" 
+                      className="form-slider" 
+                      min="0" 
+                      max="100" 
+                      value={sliderValue}
+                      onChange={(e) => setSliderValue(Number(e.target.value))}
+                    />
+                    <span className="slider-value">{sliderValue}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Placeholder for other tabs */}
+          {activeTab === 'channel-profile' && (
+            <div className="profile-config">
+              <h2 className="section-title">Channel Profile</h2>
+              
+              {/* Help text banner */}
+              <div className="info-banner">
+                <p className="info-banner-text">
+                  All channel experience related configurations will be driven by the profile attached to this channel.
+                </p>
+                <p className="info-banner-text">
+                  A channel profile can optionally be associated with a queue for more granular control.
+                </p>
+              </div>
+
+              {/* Channel profile selection */}
+              <div className="form-section">
+                <div className="form-group">
+                  <label className="form-label">
+                    Select Channel Profile<span className="required">*</span>
+                  </label>
+                  <select 
+                    className="form-select"
+                    value={selectedChannelProfile?.id || ''}
+                    onChange={(e) => {
+                      const profile = channelProfilesData.find(p => p.id === e.target.value);
+                      setSelectedChannelProfile(profile || null);
+                    }}
+                  >
+                    <option value="">Select a channel profile...</option>
+                    {channelProfilesData.map(profile => (
+                      <option key={profile.id} value={profile.id}>
+                        {profile.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Create new profile CTA */}
+                <button 
+                  className="create-profile-btn"
+                  onClick={() => alert('Create new channel profile functionality coming soon!')}
+                >
+                  <span>+</span> Create new channel profile
+                </button>
+              </div>
+
+              {/* Profile configuration summary */}
+              {selectedChannelProfile && (
+                <div className="profile-summary-card">
+                  <h3 className="profile-summary-title">
+                    Configuration Summary: {selectedChannelProfile.name}
+                  </h3>
+                  <p className="profile-description">
+                    {selectedChannelProfile.description}
+                  </p>
+                  
+                  <div className="config-grid">
+                    <div className="config-item">
+                      <span className="config-label">Pre-chat Survey</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.preChatSurvey ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.preChatSurvey ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Post-chat Survey</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.postChatSurvey ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.postChatSurvey ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">File Attachments</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.fileAttachments ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.fileAttachments ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Customer Wait Time</span>
+                      <span className="config-value">
+                        {selectedChannelProfile.configurations.customerWaitTime}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Auto-close After Inactivity</span>
+                      <span className="config-value">
+                        {selectedChannelProfile.configurations.autoCloseAfterInactivity}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Conversation Mode</span>
+                      <span className="config-value">
+                        {selectedChannelProfile.configurations.conversationMode}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Authenticated Chat</span>
+                      <span className={`config-value ${selectedChannelProfile.configurations.authenticatedChat ? 'enabled' : 'disabled'}`}>
+                        {selectedChannelProfile.configurations.authenticatedChat ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'routing-profile' && (
+            <div className="profile-config">
+              <h2 className="section-title">Routing Profile</h2>
+              
+              {/* Help text banner */}
+              <div className="info-banner">
+                <p className="info-banner-text">
+                  All routing decisions will be driven by the profile attached to this channel.
+                </p>
+              </div>
+
+              {/* Routing profile selection */}
+              <div className="form-section">
+                <div className="form-group">
+                  <label className="form-label">
+                    Select Routing Profile<span className="required">*</span>
+                  </label>
+                  <select 
+                    className="form-select"
+                    value={selectedRoutingProfile?.id || ''}
+                    onChange={(e) => {
+                      const profile = routingProfilesData.find(p => p.id === e.target.value);
+                      setSelectedRoutingProfile(profile || null);
+                    }}
+                  >
+                    <option value="">Select a routing profile...</option>
+                    {routingProfilesData.map(profile => (
+                      <option key={profile.id} value={profile.id}>
+                        {profile.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Create new profile CTA */}
+                <button 
+                  className="create-profile-btn"
+                  onClick={() => alert('Create new routing profile functionality coming soon!')}
+                >
+                  <span>+</span> Create new routing profile
+                </button>
+              </div>
+
+              {/* Profile configuration summary */}
+              {selectedRoutingProfile && (
+                <div className="profile-summary-card">
+                  <h3 className="profile-summary-title">
+                    Configuration Summary: {selectedRoutingProfile.name}
+                  </h3>
+                  <p className="profile-description">
+                    {selectedRoutingProfile.description}
+                  </p>
+                  
+                  <div className="config-grid">
+                    <div className="config-item">
+                      <span className="config-label">Routing Method</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.routingMethod}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Fallback Queue</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.fallbackQueue}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Priority Level</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.priorityLevel}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Work Distribution Mode</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.workDistributionMode}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Capacity Per Agent</span>
+                      <span className="config-value">
+                        {selectedRoutingProfile.configurations.capacityPerAgent}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Presence-based Routing</span>
+                      <span className={`config-value ${selectedRoutingProfile.configurations.presenceBasedRouting ? 'enabled' : 'disabled'}`}>
+                        {selectedRoutingProfile.configurations.presenceBasedRouting ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                    
+                    <div className="config-item">
+                      <span className="config-label">Skill-based Routing</span>
+                      <span className={`config-value ${selectedRoutingProfile.configurations.skillBasedRouting ? 'enabled' : 'disabled'}`}>
+                        {selectedRoutingProfile.configurations.skillBasedRouting ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab !== 'general' && activeTab !== 'channel-profile' && activeTab !== 'routing-profile' && (
+            <div className="placeholder-content">
+              <h2 className="section-title">
+                {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Configuration
+              </h2>
+              <p>Content for {activeTab} tab will be displayed here.</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Bottom right chat widget preview */}
+      <div className="chat-widget-preview">
+        <div className="chat-bubble">
+          <div className="chat-bubble-header">Let's chat</div>
+          <div className="chat-bubble-status">We're online.</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CreateChatChannelPage;
